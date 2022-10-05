@@ -559,8 +559,14 @@
       - notimplemented
 
 - name: "NOTSCORED | 5.5 | PATCH | Ensure root login is restricted to system console"
-  command: /bin/true
-  changed_when: no
+  file:
+    src: etc/securetty
+    dest: /etc/securetty
+    owner: root
+    group: root
+    mode: 0600
+  when:
+      - sles12cis_rule_5_5
   tags:
       - level1
       - level2
